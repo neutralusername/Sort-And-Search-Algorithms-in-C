@@ -56,7 +56,7 @@ struct Node *insertionSortLinkedList(struct Node *head, int asc) {
     return sorted;
 }
 
-void *bubbleSortArray(int *input, int size, int asc) {
+void bubbleSortArray(int *input, int size, int asc) {
     //simple bubble sort implementation
     int i, j, temp; //declare variables. i and j are used for iteration, temp is used for swapping.
     for(i = 0; i < size; i++) { //iterate through the array
@@ -79,7 +79,7 @@ void *bubbleSortArray(int *input, int size, int asc) {
     }
 }
 
-void *insertionSortArray(int *input, int size, int asc) {
+void insertionSortArray(int *input, int size, int asc) {
     int i, j, temp; //declare variables. i and j are used for iteration, temp is used for swapping.
     for (i = 1; i < size; i++) { //iterate through the array
         temp = input[i]; //set the temp variable to the current element
