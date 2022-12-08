@@ -1,6 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
-#include "arrayfun.h"
 
 void quicksort(int *arr, int len)
 {
