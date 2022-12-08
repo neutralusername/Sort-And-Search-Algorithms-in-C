@@ -1,9 +1,8 @@
 #include <time.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include "quicksort.h"
 #include "linked_list.h"
-
-#define N 100
 
 void execute_12();
 void execute_13();
