@@ -1,22 +1,22 @@
 #include <stdlib.h>
 
-typedef struct node
+struct Node
 {
-    struct node *next;
+    struct Node *next;
     int data;
-} node;
+};
 
-node *linked_list_from_array(int *arr, int len)
+struct Node *linked_list_from_array(int *arr, int len)
 {
-    node *head = malloc(sizeof(node));
+    struct Node *head = malloc(sizeof(struct Node));
     head->next = NULL;
     head->data = arr[0];
 
-    node *tail = head;
+    struct Node *tail = head;
 
     for (int i = 1; i < len; i++)
     {
-        tail->next = malloc(sizeof(node));
+        tail->next = malloc(sizeof(struct Node));
         tail = tail->next;
         tail->next = NULL;
         tail->data = arr[i];
@@ -25,7 +25,7 @@ node *linked_list_from_array(int *arr, int len)
     return head;
 }
 
-void print_linked_list(node *head)
+void print_linked_list(struct Node *head)
 {
     while (head != NULL)
     {
@@ -34,9 +34,9 @@ void print_linked_list(node *head)
     }
 }
 
-void free_linked_list(node *head)
+void free_linked_list(struct Node *head)
 {
-    node *next;
+    struct Node *next;
     while (head != NULL)
     {
         next = head->next;

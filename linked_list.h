@@ -1,8 +1,9 @@
 #pragma once
-#include "linked_list.c"
 
-node *linked_list_from_array(int *arr, int len);
+struct Node;
 
-void print_linked_list(node *head);
+struct Node *linked_list_from_array(int *arr, int len);
 
-void free_linked_list(node *head);
+void print_linked_list(struct Node *head);
+
+void free_linked_list(struct Node *head);
