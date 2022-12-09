@@ -47,4 +47,5 @@ void execute_14() {
     printf("time to sort linked list:\t%fms\n", (double)(end4 - begin4)/ CLOCKS_PER_SEC*1000); //print the time it took to sort the linked list
 
     free_linked_list(rndHead2048); //free the linked list
+    free(rndArr2048); //free the array
 }
