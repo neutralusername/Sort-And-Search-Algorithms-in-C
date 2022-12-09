@@ -38,10 +38,10 @@ void execute_14() {
     clock_t begin4 = clock(); //start timer
     rndHead2048 = insertionSortLinkedList(rndHead2048, 1); //sort the linked list
     clock_t end4 = clock(); //stop timer
-    printf("V\n");
+    printf("\nV\n");
     print_linked_list(rndHead2048); //print the linked list
 
-    printf("time to generate array:\t\t%fms\n", (double)(end - begin)/ CLOCKS_PER_SEC*1000); //print the time it took to generate the array
+    printf("\ntime to generate array:\t\t%fms\n", (double)(end - begin)/ CLOCKS_PER_SEC*1000); //print the time it took to generate the array
     printf("time to create linked list:\t%fms\n", (double)(end2 - begin2)/ CLOCKS_PER_SEC*1000); //print the time it took to create the linked list
     printf("time to sort array:\t\t%fms\n", (double)(end3 - begin3)/ CLOCKS_PER_SEC*1000); //print the time it took to sort the array
     printf("time to sort linked list:\t%fms\n", (double)(end4 - begin4)/ CLOCKS_PER_SEC*1000); //print the time it took to sort the linked list
