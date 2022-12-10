@@ -3,25 +3,25 @@
 #include <time.h>
 #include <math.h>
 
-int validateSortedArray(int *pArray, int size, int asc) {
-    if(asc)  //if the array should be sorted in ascending order
-        for(int i = 0; i < size - 1; i++) {
-            if(pArray[i] > pArray[i + 1]) { //if the next element is smaller than the current element
+int validateSortedArray(int *input_array, int length, int ascending) {
+    if(ascending)  //if the array should be sorted in ascending order
+        for(int i = 0; i < length - 1; i++) {
+            if(input_array[i] > input_array[i + 1]) { //if the next element is smaller than the current element
                 return 0; //the array is not sorted in ascending order and the function returns 0
             }
         }
-    else for(int i = 0; i < size - 1; i++) { //if the array should be sorted in descending order
-        if(pArray[i] < pArray[i + 1]) { //if the next element is bigger than the current element
+    else for(int i = 0; i < length - 1; i++) { //if the array should be sorted in descending order
+        if(input_array[i] < input_array[i + 1]) { //if the next element is bigger than the current element
             return 0; //the array is not sorted in descending order and the function returns 0
         }
     }
     return 1;
 }
 
-void printIntArray(int *pArray, int size) {
+void printArray(int *input_array, int length) {
     int lineBreak = 0; //counter for linebreaks
-    for(int i = 0; i < size; i++) {
-        printf("%d ", pArray[i]);
+    for(int i = 0; i < length; i++) {
+        printf("%d ", input_array[i]);
         if(++lineBreak > 14) { //print 15 numbers per line
             printf("\n");
             lineBreak = 0; //reset the counter
@@ -30,10 +30,9 @@ void printIntArray(int *pArray, int size) {
     printf("\n");
 }
 
-int rand_array(signed int *array, int arraysize) { 
-    time_t t;
+int randomizeArray(signed int *array, int length) { 
     srand(time(0));
-    for (int i = 0; i < arraysize; i++) {
+    for (int i = 0; i < length; i++) {
         int randomint = rand();
         if(rand() % 2) {
             randomint = randomint * -1;
@@ -44,21 +43,18 @@ int rand_array(signed int *array, int arraysize) {
     return 0;
 }
 
-int asc_array(signed int *array, int arraysize) {
-    for(int i =0; i<arraysize; i++)
-        *(array+i) = -32768+i;
-    return 0;
+void fillArrayAscening(signed int *array, int length) {
+    for(int i = 0; i < length; i++)
+        *(array + i) = -32768 + i;
 }
 
-int desc_array(signed int *array, int arraysize) {
-    for(int i =0; i<arraysize; i++)
-        *(array+i) = 32767-i;
-    return 0;
+void fillArrayDescending(signed int *array, int length) {
+    for(int i = 0; i < length; i++)
+        *(array + i) = 32767 - i;
 }
 
-int copyArray(int *source_ar, int source_size, int *dest_ar) {
-    for(int i=0; i < source_size; i++) {
-        *(dest_ar + i) = *(source_ar + i);
+void copyArray(int *source_array, int *destination_array, int length) {
+    for(int i = 0; i < length; i++) {
+        *(destination_array + i) = *(source_array + i);
     }
-    return 0;
 }
