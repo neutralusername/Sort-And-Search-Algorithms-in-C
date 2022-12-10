@@ -137,7 +137,7 @@ void execute_1_4()
     clock_t begin4 = clock();                              // start timer
     rndHead2048 = insertionSortLinkedList(rndHead2048, 1); // sort the linked list
     clock_t end4 = clock();                                // stop timer
-    printf("\nV\n");
+    printf("V\n");
     printLinkedList(rndHead2048); // print the linked list
 
     printf("\n\ntime to generate array:\t\t%f ms\n", (double)(end1 - begin1) / CLOCKS_PER_SEC * 1000); // print the time it took to generate the array
