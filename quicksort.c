@@ -2,7 +2,8 @@
 
 int compare(int a, int b, int ascending);
 
-void quickSortArray(int *array, int length, int ascending) {
+void quickSortArray(int *array, int length, int ascending)
+{
     int pivot = array[length / 2];
     array[length / 2] = array[length - 1];
 
@@ -13,7 +14,7 @@ void quickSortArray(int *array, int length, int ascending) {
 
     // Separating elements relative to pivot
     for (int i = 0; i < length - 1; i++)
-            compare(pivot, array[i], ascending) ? (sub1[i1++] = array[i]) : (sub0[i0++] = array[i]);
+        compare(pivot, array[i], ascending) ? (sub1[i1++] = array[i]) : (sub0[i0++] = array[i]);
 
     // Recursive calls on sub arrays
     if (i0 > 1)
@@ -34,6 +35,7 @@ void quickSortArray(int *array, int length, int ascending) {
 
 // checks if a and b are int the specified order
 // returns 0 if a == b
-int compare(int a, int b, int ascending) {
-    return (ascending) ? (a > b) : (a < b);
+int compare(int a, int b, int ascending)
+{
+    return (ascending) ? (a < b) : (a > b);
 }
