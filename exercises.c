@@ -34,30 +34,35 @@ void execute_1_2()
     int arr_sizes[7] = {8, 32, 128, 512, 2084, 8192, 32768};
     long times[4][21];
 
-    printf("executing 1.2\n");
+    printf("executing 1.2");
 
     for (int sort = 0; sort < 4; sort++)
     {
-        printf("- %s\t", sort_names[sort]); // logging progress
-        for (int f_init = 0; f_init < 3; f_init++)
+        printf("\n> %s\t\t0%%", sort_names[sort]); // logging progress
+        int progress = 0;
+
+        for (int init = 0; init < 3; init++)
         {
-            printf(" ."); // logging progress
             for (int size = 0; size < 7; size++)
             {
                 int len = arr_sizes[size];
                 int *arr = malloc(sizeof(int) * len);
-                init_funs[f_init](arr, len);
+                init_funs[init](arr, len);
 
                 clock_t begin = clock();
                 sort_funs[sort](arr, len, 1);
                 clock_t end = clock();
 
-                times[sort][3 * size + f_init] = (end - begin) * 1000 / CLOCKS_PER_SEC;
+                times[sort][3 * size + init] = (end - begin) * 1000 / CLOCKS_PER_SEC;
 
                 free(arr);
+
+                // logging progress
+                (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
+                progress = (init * 7 + size + 1) * 100 / (3 * 7);
+                printf("%d%%", progress);
             }
         }
-        printf(" done\n"); // logging progress
     }
 
     // printing results
