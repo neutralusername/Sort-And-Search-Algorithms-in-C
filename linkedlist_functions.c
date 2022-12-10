@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "node.h"
 
-struct Node *linkedListFromArray(int *array, int length) {
+struct Node *linkedListFromArray(int *array, int length)
+{
     struct Node *head = malloc(sizeof(struct Node));
     head->next = NULL;
     head->data = array[0];
@@ -20,15 +21,25 @@ struct Node *linkedListFromArray(int *array, int length) {
     return head;
 }
 
-void printLinkedList(struct Node *head) {
+void printLinkedList(struct Node *head)
+{
+    int lineBreak = 0; // counter for linebreaks
     while (head != NULL)
     {
         printf("%d ", head->data);
         head = head->next;
+
+        if (++lineBreak > 14)
+        { // print 15 numbers per line
+            printf("\n");
+            lineBreak = 0; // reset the counter
+        }
     }
+    printf("\n");
 }
 
-void freeLinkedList(struct Node *head) {
+void freeLinkedList(struct Node *head)
+{
     struct Node *next;
     while (head != NULL)
     {
