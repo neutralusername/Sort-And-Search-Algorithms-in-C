@@ -41,9 +41,9 @@ void execute_1_2()
         printf("\n> %s\t\t0%%", sort_names[sort]); // logging progress
         int progress = 0;
 
-        for (int init = 0; init < 3; init++)
+        for (int size = 0; size < 7; size++)
         {
-            for (int size = 0; size < 7; size++)
+            for (int init = 0; init < 3; init++)
             {
                 int len = arr_sizes[size];
                 int *arr = malloc(sizeof(int) * len);
@@ -59,7 +59,7 @@ void execute_1_2()
 
                 // logging progress
                 (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
-                progress = (init * 7 + size + 1) * 100 / (3 * 7);
+                progress = (size * 3 + init + 1) * 100 / (7 * 3);
                 printf("%d%%", progress);
             }
         }
