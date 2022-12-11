@@ -3,4 +3,4 @@ project(TIProjekt)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(TIProjekt sorting_algorithms.c)
+add_executable(TIProjekt sorting_algorithms.c my_try.c)
