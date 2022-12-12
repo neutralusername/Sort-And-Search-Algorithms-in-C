@@ -44,47 +44,47 @@ void printArray(int *array, int length)
     printf("\n");
 }
 
-void randomizeArray(signed int *array, int length)
+void randomizeArray(signed int *array, int length) 
 {
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < length; i++) 
     {
-        int randomint = rand();
-        if (rand() % 2)
+        int randomint = rand(); // generate a random number
+        if (rand() % 2) //with 50% chance
         {
-            randomint = randomint * -1;
-            randomint -= 1;
+            randomint = randomint * -1; // make the number negative 
+            randomint -= 1; 
         }
-        *(array + i) = randomint;
+        *(array + i) = randomint; // assign the random number to the array element
     }
 }
 
-void fillArrayAscening(signed int *array, int length)
+void fillArrayAscening(signed int *array, int length) 
 {
     for (int i = 0; i < length; i++)
-        *(array + i) = -32768 + i;
+        *(array + i) = -32768 + i; // fill the array with ascending numbers
 }
 
 void fillArrayDescending(signed int *array, int length)
 {
     for (int i = 0; i < length; i++)
-        *(array + i) = 32767 - i;
+        *(array + i) = 32767 - i; // fill the array with descending numbers
 }
 
 int *copyArray(int *source_array, int length)
 {
-    int *copy = malloc(sizeof(int) * length);
-    for (int i = 0; i < length; i++)
+    int *copy = malloc(sizeof(int) * length); // allocate memory for the array
+    for (int i = 0; i < length; i++) // iterate through the array
     {
-        *(copy + i) = *(source_array + i);
+        *(copy + i) = *(source_array + i); // copy the array element
     }
-    return copy;
-}
+    return copy;   // return the copy
+} 
 
-void copyArrayIntoArray(int *source_array, int *destination_array, int length)
+void copyArrayIntoArray(int *source_array, int *destination_array, int length) 
 {
     for (int i = 0; i < length; i++)
     {
-        destination_array[i] = source_array[i];
+        destination_array[i] = source_array[i]; // copy the array element into the destination array
     }
 }
 
@@ -109,7 +109,7 @@ int testSortArray(int *pArray, int size, int asc, int print, char type)
         printf("%cSort%i:\n", type, size);
         printArray(arrCopy, size); // print the array before sorting
     }
-    switch (type)
+    switch (type) // sort the array with the given sorting algorithm
     {
     case 'b':
         bubbleSortArray(arrCopy, size, asc);

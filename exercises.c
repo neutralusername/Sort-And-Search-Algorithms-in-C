@@ -19,7 +19,7 @@ void execute_1_1()
     int *arr16 = randomizedArray(16);
     int *arr64 = randomizedArray(64);
     // print arrays before and after sorting, check if all were successful
-    int success =
+    int success = // 1 if all were successful, 0 otherwise
         testSortArray(arr8, 8, 1, 1, 'b') &&
         testSortArray(arr16, 16, 1, 1, 'b') &&
         testSortArray(arr64, 64, 1, 1, 'b') &&
@@ -49,72 +49,72 @@ void execute_1_1()
 
 void execute_1_2()
 {
-    void (*init_funs[3])(int *array, int length) = {
+    void (*shuffle_funcs[3])(int *array, int length) = {    // array of function pointers to shuffle functions
         &randomizeArray,
         &fillArrayAscening,
         &fillArrayDescending};
 
-    void (*sort_funs[4])(int *array, int length, int ascending) = {
+    void (*sort_funcs[4])(int *array, int length, int ascending) = {   // array of function pointers to sorting functions
         &bubbleSortArray,
         &insertionSortArray,
         &mergeSortArray,
         &quickSortArray};
 
-    char init_names[3][4] = {"rnd", "asc", "des"};
-    char sort_names[4][15] = {"bubble sort   ", "insertion sort", "merge sort    ", "quick sort    "};
-    int arr_sizes[7] = {8, 32, 128, 512, 2084, 8192, 32768};
-    long times[4][21];
-    int arr[32768];
+    char shuffle_names[3][4] = {"rnd", "asc", "des"}; // names of shuffle types
+    char sort_names[4][15] = {"bubble sort   ", "insertion sort", "merge sort    ", "quick sort    "}; // names of sorting algorithms
+    int arr_sizes[7] = {8, 32, 128, 512, 2084, 8192, 32768}; // array sizes
+    long times[4][21]; // array of times for each sorting algorithm and each array configuration
+    int arr[32768]; // array for sorting
 
     printf("executing 1.2");
 
-    for (int sort = 0; sort < 4; sort++)
+    for (int sort_algo = 0; sort_algo < 4; sort_algo++) // for each sorting algorithm
     {
-        fprintf(stdout, "\n> %s\t0%%", sort_names[sort]); // logging progress
-        int progress = 0;
+        fprintf(stdout, "\n> %s\t0%%", sort_names[sort_algo]); // logging progress of sorting algorithm
+        int progress = 0;  // progress of current sorting algorithm in %
 
-        for (int size = 0; size < 7; size++)
+        for (int arr_size = 0; arr_size < 7; arr_size++) // for each array size
         {
-            for (int init = 0; init < 3; init++)
+            for (int shuffleType = 0; shuffleType < 3; shuffleType++) // for each shuffle type
             {
-                int len = arr_sizes[size];
-                init_funs[init](arr, len);
+                int current_size = arr_sizes[arr_size]; // current array size
+                shuffle_funcs[shuffleType](arr, current_size); // initializing array 
 
-                clock_t begin = clock();
-                sort_funs[sort](arr, len, 1);
-                clock_t end = clock();
+                clock_t begin = clock(); // starting timer
+                sort_funcs[sort_algo](arr, current_size, 1); // sorting array ascending
+                clock_t end = clock(); // stopping timer
 
-                times[sort][3 * size + init] = (end - begin) * 1000 / CLOCKS_PER_SEC;
+                times[sort_algo][3 * arr_size + shuffleType] = (end - begin) * 1000 / CLOCKS_PER_SEC; // saving time in ms
 
                 // logging progress
                 (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
-                progress = (size * 3 + init + 1) * 100 / (7 * 3);
-                printf("%d%%", progress);
-                fflush(stdout);
+                progress = (arr_size * 3 + shuffleType + 1) * 100 / (7 * 3); // calculating progress in %
+                printf("%d%%", progress); // logging progress 
+                fflush(stdout); // flushing stdout 
             }
         }
     }
 
     // printing results
-    printf("\n\narray size\t");
+    printf("\n\narray size\t"); // printing header of table
     for (int size = 0; size < 7; size++)
-        printf("%d\t\t\t", arr_sizes[size]);
+        printf("%d\t\t\t", arr_sizes[size]); // printing array sizes
 
-    printf("\narray init\t");
+    printf("\narray init\t"); // printing header of table
     for (int init = 0; init < 3 * 7; init++)
-        printf("%s\t", init_names[init % 3]);
+        printf("%s\t", shuffle_names[init % 3]); // printing shuffle types
 
-    printf("\n");
-    for (int i = 0; i < 23; i++)
+    printf("\n"); 
+    for (int i = 0; i < 23; i++) // printing line under header
         printf("--------");
 
     printf("\n");
-    for (int sort = 0; sort < 4; sort++)
+    for (int sort = 0; sort < 4; sort++) // printing times for each sorting algorithm
     {
-        printf("%s\t", sort_names[sort]);
-        for (int arr_conf = 0; arr_conf < 3 * 7; arr_conf++)
+        printf("%s\t", sort_names[sort]); 
+        for (int arr_conf = 0; arr_conf < 3 * 7; arr_conf++) // printing times for each array configuration
         {
-            printf("%ldms\t", times[sort][arr_conf]);
+            printf("%ldms\t", times[sort][arr_conf]); // printing time
         }
         printf("\n");
     }
@@ -122,24 +122,24 @@ void execute_1_2()
 
 void execute_1_3()
 {
-    long times[20];
-    int ref_arr[2000], arr[2000];
-    randomizeArray(ref_arr, 2000);
+    long times[20]; // array of times for each sorting algorithm and each array configuration
+    int ref_arr[2000], arr[2000]; // arrays for sorting
+    randomizeArray(ref_arr, 2000); // initializing array
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 20; i++) // for each sorting algorithm 
     {
-        copyArrayIntoArray(ref_arr, arr, 2000);
-        clock_t begin = clock();
-        bubbleSortArray(arr, 2000, 1);
-        clock_t end = clock();
+        copyArrayIntoArray(ref_arr, arr, 2000); // copying reference array into array to sort
+        clock_t begin = clock(); // starting timer
+        bubbleSortArray(arr, 2000, 1); // sorting array ascending
+        clock_t end = clock(); // stopping timer
 
-        times[i] = (end - begin) * 1000 / CLOCKS_PER_SEC;
+        times[i] = (end - begin) * 1000 / CLOCKS_PER_SEC; // saving time in ms 
     }
 
-    long min = times[0], max = times[0], sum = 0;
-    for (int i = 0; i < 20; i++)
+    long min = times[0], max = times[0], sum = 0; // variables for min, max and sum of times
+    for (int i = 0; i < 20; i++) // calculating min, max and sum of times
     {
-        if (times[i] < min)
+        if (times[i] < min) 
             min = times[i];
         if (times[i] > max)
             max = times[i];
