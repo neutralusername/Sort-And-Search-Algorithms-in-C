@@ -1,9 +1,11 @@
 #ifndef ARRAY_FUNCTIONS_H
 #define ARRAY_FUNCTIONS_H
-int validateSortedArray(int *pArray, int size, int asc);
-void printIntArray(int *pArray, int size);
-int rand_array(signed int *array, int arraysize);
-int asc_array(signed int *array, int arraysize);
-int desc_array(signed int *array, int arraysize);
-int copyArray(int *source_ar, int source_size, int *dest_ar);
+int validateSortedArray(int *array, int length, int ascending);
+void printArray(int *array, int length);
+int *randomizedArray(int size);
+void fillArrayAscening(signed int *array, int length);
+void fillArrayDescending(signed int *array, int length);
+int *copyArray(int *source_array, int length);
+void applySortArray(int *pArray, int size, int asc, int print, char type);
+void randomizeArray(signed int *array, int length);
 #endif
