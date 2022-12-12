@@ -80,37 +80,59 @@ int *copyArray(int *source_array, int length)
     return copy;
 }
 
-int *randomizedArray(int size) {
-    int *arr = malloc(sizeof(int) * size); //allocate memory for the array
-    for(int i = 0; i < size; i++) { //fill the array with random integer between -32768 and 32767
-        int rnd = rand(); //generate a random number max 32767
-        if(rand() % 2 == 0) //if random number is even
-            rnd = -1 * (rnd +1); //make rnd negative and add+1 to allow -32768
-        arr[i] = rnd;  
+void copyArrayIntoArray(int *source_array, int *destination_array, int length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        destination_array[i] = source_array[i];
+    }
+}
+
+int *randomizedArray(int size)
+{
+    int *arr = malloc(sizeof(int) * size); // allocate memory for the array
+    for (int i = 0; i < size; i++)
+    {                             // fill the array with random integer between -32768 and 32767
+        int rnd = rand();         // generate a random number max 32767
+        if (rand() % 2 == 0)      // if random number is even
+            rnd = -1 * (rnd + 1); // make rnd negative and add+1 to allow -32768
+        arr[i] = rnd;
     }
     return arr;
 }
 
-void applySortArray(int *pArray, int size, int asc, int print, char type) {
-    int *arrCopy = copyArray(pArray, size); //copy the array
-    if(print) {
-        printf("%cSort%i:\n",type, size);
-        printArray(arrCopy, size); //print the array before sorting
+int testSortArray(int *pArray, int size, int asc, int print, char type)
+{
+    int *arrCopy = copyArray(pArray, size); // copy the array
+    if (print)
+    {
+        printf("%cSort%i:\n", type, size);
+        printArray(arrCopy, size); // print the array before sorting
     }
-    if(type == 'b')
+    switch (type)
+    {
+    case 'b':
         bubbleSortArray(arrCopy, size, asc);
-    else if(type =='i')
+        break;
+    case 'i':
         insertionSortArray(arrCopy, size, asc);
-    else if(type == 'm')
+        break;
+    case 'm':
         mergeSortArray(arrCopy, size, asc);
-    else if(type == 'q')
+        break;
+    case 'q':
         quickSortArray(arrCopy, size, asc);
-    if(print) {
-        printf("V\n");
-        printArray(arrCopy, size); //print the array after sorting
-        if(validateSortedArray(arrCopy, size, asc)) //check if the array is sorted
-            printf("%cSort%i succeeded %s\n",type, size, asc?"asc":"desc");
-        else printf("%cSort%i failed %s\n",type, size, asc?"asc":"desc");
     }
-    free(arrCopy); //free the memory
+    int success = validateSortedArray(arrCopy, size, asc); // check if the array is sorted
+    if (print)
+    {
+        printf("V\n");
+        printArray(arrCopy, size); // print the array after sorting
+        if (success)               // if the array is sorted
+            printf("%cSort%i succeeded %s\n", type, size, asc ? "asc" : "desc");
+        else
+            printf("%cSort%i failed %s\n", type, size, asc ? "asc" : "desc");
+    }
+    free(arrCopy); // free the memory
+    return success;
 }

@@ -14,32 +14,42 @@
 void execute_1_1()
 {
     printf("base implementation\n");
-    //generate arrays
+    // generate arrays
     int *arr8 = randomizedArray(8);
     int *arr16 = randomizedArray(16);
     int *arr64 = randomizedArray(64);
-    //print arrays before and after sorting
-    applySortArray(arr8, 8, 1, 1, 'b');
-    applySortArray(arr16, 16, 1, 1, 'b');
-    applySortArray(arr64, 64, 1, 1, 'b');
-    applySortArray(arr8, 8, 1, 1, 'i');
-    applySortArray(arr16, 16, 1, 1, 'i');
-    applySortArray(arr64, 64, 1, 1, 'i');
-    applySortArray(arr8, 8, 1, 1, 'm');
-    applySortArray(arr16, 16, 1, 1, 'm');
-    applySortArray(arr64, 64, 1, 1, 'm');
-    applySortArray(arr8, 8, 1, 1, 'q');
-    applySortArray(arr16, 16, 1, 1, 'q');
-    applySortArray(arr64, 64, 1, 1, 'q');
-    //free memory of arrays
+    // print arrays before and after sorting, check if all were successful
+    int success =
+        testSortArray(arr8, 8, 1, 1, 'b') &&
+        testSortArray(arr16, 16, 1, 1, 'b') &&
+        testSortArray(arr64, 64, 1, 1, 'b') &&
+        testSortArray(arr8, 8, 1, 1, 'i') &&
+        testSortArray(arr16, 16, 1, 1, 'i') &&
+        testSortArray(arr64, 64, 1, 1, 'i') &&
+        testSortArray(arr8, 8, 1, 1, 'm') &&
+        testSortArray(arr16, 16, 1, 1, 'm') &&
+        testSortArray(arr64, 64, 1, 1, 'm') &&
+        testSortArray(arr8, 8, 1, 1, 'q') &&
+        testSortArray(arr16, 16, 1, 1, 'q') &&
+        testSortArray(arr64, 64, 1, 1, 'q');
+    // free memory of arrays
     free(arr8);
     free(arr16);
     free(arr64);
+
+    if (success)
+    {
+        printf("\nAll sorting algorithms were successful!\n");
+    }
+    else
+    {
+        printf("\nAt least one sorting algorithm failed!\n");
+    }
 }
 
 void execute_1_2()
 {
-      void (*init_funs[3])(int *array, int length) = {
+    void (*init_funs[3])(int *array, int length) = {
         &randomizeArray,
         &fillArrayAscening,
         &fillArrayDescending};
@@ -51,15 +61,16 @@ void execute_1_2()
         &quickSortArray};
 
     char *init_names[3] = {"rnd", "asc", "des"};
-    char *sort_names[4] = {"bubblesort", "insertionsort", "mergesort", "quicksort"};
+    char *sort_names[4] = {"bubble sort   ", "insertion sort", "merge sort    ", "quick sort    "};
     int arr_sizes[7] = {8, 32, 128, 512, 2084, 8192, 32768};
     long times[4][21];
+    int arr[32768];
 
     printf("executing 1.2");
 
     for (int sort = 0; sort < 4; sort++)
     {
-        printf("\n> %s\t\t0%%", sort_names[sort]); // logging progress
+        printf("\n> %s\t0%%", sort_names[sort]); // logging progress
         int progress = 0;
 
         for (int size = 0; size < 7; size++)
@@ -67,7 +78,6 @@ void execute_1_2()
             for (int init = 0; init < 3; init++)
             {
                 int len = arr_sizes[size];
-                int *arr = malloc(sizeof(int) * len);
                 init_funs[init](arr, len);
 
                 clock_t begin = clock();
@@ -75,8 +85,6 @@ void execute_1_2()
                 clock_t end = clock();
 
                 times[sort][3 * size + init] = (end - begin) * 1000 / CLOCKS_PER_SEC;
-
-                free(arr);
 
                 // logging progress
                 (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
@@ -113,14 +121,13 @@ void execute_1_2()
 
 void execute_1_3()
 {
-   long times[20];
-    int ref_arr[2000];
+    long times[20];
+    int ref_arr[2000], arr[2000];
     randomizeArray(ref_arr, 2000);
 
     for (int i = 0; i < 20; i++)
     {
-        int arr[2000];
-        copyArray(ref_arr, 2000);
+        copyArrayIntoArray(ref_arr, arr, 2000);
         clock_t begin = clock();
         bubbleSortArray(arr, 2000, 1);
         clock_t end = clock();
@@ -147,9 +154,9 @@ void execute_1_3()
 
 void execute_1_4()
 {
-    clock_t begin1 = clock();                     // start timer
-    int *rndArr2048 =  randomizedArray(2048);     // create array
-   
+    clock_t begin1 = clock();                // start timer
+    int *rndArr2048 = randomizedArray(2048); // create array
+
     clock_t end1 = clock();                                           // stop timer
     clock_t begin2 = clock();                                         // start timer
     struct Node *rndHead2048 = linkedListFromArray(rndArr2048, 2048); // create linked list

@@ -6,6 +6,7 @@ int *randomizedArray(int size);
 void fillArrayAscening(signed int *array, int length);
 void fillArrayDescending(signed int *array, int length);
 int *copyArray(int *source_array, int length);
-void applySortArray(int *pArray, int size, int asc, int print, char type);
+void copyArrayIntoArray(int *source_array, int *destination_array, int length);
+int testSortArray(int *pArray, int size, int asc, int print, char type);
 void randomizeArray(signed int *array, int length);
 #endif
