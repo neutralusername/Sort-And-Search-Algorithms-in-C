@@ -93,7 +93,6 @@ void execute_1_2()
 void execute_1_3()
 {
     long times[20];
-
     int ref_arr[2000];
     randomizeArray(ref_arr, 2000);
 
@@ -109,9 +108,21 @@ void execute_1_3()
         times[i] = (end - begin) * 1000 / CLOCKS_PER_SEC;
     }
 
+    long min = times[0], max = times[0], sum = 0;
+    for (int i = 0; i < 20; i++)
+    {
+        if (times[i] < min)
+            min = times[i];
+        if (times[i] > max)
+            max = times[i];
+        sum += times[i];
+    }
+
     // printing results
     for (int i = 0; i < 20; i++)
         printf("[%d]\t%ldms\n", i, times[i]);
+
+    printf("\nminimum time: %ld ms\nmaximum time: %ld ms\naverage time: %f ms", min, max, (float)sum / 20.0f);
 }
 
 void execute_1_4()
