@@ -60,8 +60,8 @@ void execute_1_2()
         &mergeSortArray,
         &quickSortArray};
 
-    char *init_names[3] = {"rnd", "asc", "des"};
-    char *sort_names[4] = {"bubble sort   ", "insertion sort", "merge sort    ", "quick sort    "};
+    char init_names[3][4] = {"rnd", "asc", "des"};
+    char sort_names[4][15] = {"bubble sort   ", "insertion sort", "merge sort    ", "quick sort    "};
     int arr_sizes[7] = {8, 32, 128, 512, 2084, 8192, 32768};
     long times[4][21];
     int arr[32768];
@@ -70,7 +70,7 @@ void execute_1_2()
 
     for (int sort = 0; sort < 4; sort++)
     {
-        printf("\n> %s\t0%%", sort_names[sort]); // logging progress
+        fprintf(stdout, "\n> %s\t0%%", sort_names[sort]); // logging progress
         int progress = 0;
 
         for (int size = 0; size < 7; size++)
@@ -90,6 +90,7 @@ void execute_1_2()
                 (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
                 progress = (size * 3 + init + 1) * 100 / (7 * 3);
                 printf("%d%%", progress);
+                fflush(stdout);
             }
         }
     }
@@ -149,7 +150,7 @@ void execute_1_3()
     for (int i = 0; i < 20; i++)
         printf("[%d]\t%ldms\n", i, times[i]);
 
-    printf("\nminimum time: %ld ms\nmaximum time: %ld ms\naverage time: %f ms", min, max, (float)sum / 20.0f);
+    printf("\nminimum time: %ld ms\nmaximum time: %ld ms\naverage time: %f ms\n", min, max, (float)sum / 20.0f);
 }
 
 void execute_1_4()
