@@ -75,20 +75,20 @@ void execute_1_2()
 
         for (int arr_size = 0; arr_size < 7; arr_size++) // for each array size
         {
-            for (int shuffleType = 0; shuffleType < 3; shuffleType++) // for each shuffle type
+            for (int shuffle_type = 0; shuffle_type < 3; shuffle_type++) // for each shuffle type
             {
                 int current_size = arr_sizes[arr_size]; // current array size
-                shuffle_funcs[shuffleType](arr, current_size); // initializing array 
+                shuffle_funcs[shuffle_type](arr, current_size); // initializing array 
 
                 clock_t begin = clock(); // starting timer
                 sort_funcs[sort_algo](arr, current_size, 1); // sorting array ascending
                 clock_t end = clock(); // stopping timer
 
-                times[sort_algo][3 * arr_size + shuffleType] = (end - begin) * 1000 / CLOCKS_PER_SEC; // saving time in ms
+                times[sort_algo][3 * arr_size + shuffle_type] = (end - begin) * 1000 / CLOCKS_PER_SEC; // saving time in ms
 
                 // logging progress
                 (progress < 10) ? printf("\b\b") : printf("\b\b\b"); // deleting previous progress log
-                progress = (arr_size * 3 + shuffleType + 1) * 100 / (7 * 3); // calculating progress in %
+                progress = (arr_size * 3 + shuffle_type + 1) * 100 / (7 * 3); // calculating progress in %
                 printf("%d%%", progress); // logging progress 
                 fflush(stdout); // flushing stdout 
             }

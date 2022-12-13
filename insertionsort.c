@@ -10,7 +10,7 @@ struct Node *sortedInsert(struct Node *head, struct Node *insertionNode, int asc
     } 
     else  // if the node should be inserted somewhere else in the list
     {
-         struct Node *current = head; // set the current element to the head of the list
+        struct Node *current = head; // set the current element to the head of the list. used for iteration
         while (current->next != NULL && (ascending ? current->next->data < insertionNode->data : current->next->data > insertionNode->data)) // iterate through the list until the next element is larger than the node to be inserted
         {
             current = current->next; // set the current element to the next element
