@@ -43,23 +43,16 @@ void execute_1_1() {
 
 void execute_1_2() {
     void( * shuffle_funcs[3])(int * array, int length) = { // array of function pointers to shuffle functions
-        &
-        randomize_array,
-        &
-        fill_array_ascening,
-        &
-        fill_array_descending
+        &randomize_array,
+        &fill_array_ascening,
+        &fill_array_descending
     };
 
     void( * sort_funcs[4])(int * array, int length, int ascending) = { // array of function pointers to sorting functions
-        &
-        bubble_sort_array,
-        &
-        insertion_sort_array,
-        &
-        merge_sort_array,
-        &
-        quick_sort_array
+        &bubble_sort_array,
+        &insertion_sort_array,
+        &merge_sort_array,
+        &quick_sort_array
     };
 
     char shuffle_names[3][4] = {
