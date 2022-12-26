@@ -16,11 +16,17 @@ int main(int argc, char * args[]) {
             execute_1_3();
         } else if (!strcmp(args[1], "-1.4")) {
             execute_1_4();
+        } else if (!strcmp(args[1], "-2.1")) {
+            execute_2_1();
+        } else if (!strcmp(args[1], "-2.2")) {
+            execute_2_2();
+        } else if (!strcmp(args[1], "-2.3")) {
+            execute_2_3();
         } else {
-            fprintf(stderr, "invalid argument. valid arguments are \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\"");
+            fprintf(stderr, "invalid argument. valid arguments are \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"");
         }
     } else {
-        fprintf(stderr, "missing argument: provide one of \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\"");
+        fprintf(stderr, "missing argument: provide one of \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"");
     }
     return 0;
 }

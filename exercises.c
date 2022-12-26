@@ -197,3 +197,15 @@ void execute_1_4() {
     free_linked_list(rnd_head_2048); // free the linked list
     free(rnd_arr_2048); // free the array
 }
+
+void execute_2_1(){
+    printf("execute_2_1");
+}
+
+void execute_2_2(){
+    printf("execute_2_2");
+}
+
+void execute_2_3(){
+    printf("execute_2_3");
+}
