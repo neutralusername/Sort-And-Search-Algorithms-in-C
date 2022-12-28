@@ -229,7 +229,7 @@ void execute_2_1(){
     } while(1);
     print_array_of_key_value_pairs(arr, length);
     printf ("\n");
-    struct tree_node *root = balanced_BST(arr, length);
+    struct tree_node *root = generate_BST(arr, length);
     char *userInput2;
     do {
         printf("enter %s to search for (q to quit): ", strcmp(userInput, "k") ? "value" : "key");
@@ -245,10 +245,10 @@ void execute_2_1(){
             exit(0);
         }
         else if(strcmp(userInput, "k") == 0) {
-            printf("%d\n", search_key(root, strtod(userInput2, NULL)));
+            printf("%s\n", tree_search_key(root, strtod(userInput2, NULL)) ? "found" : "not found");
         }
         else {
-            printf("%d\n", search_value(root, userInput2));
+            printf("%s\n", tree_search_value(root, userInput2) ? "found" : "not found");
         }
         free(userInput2);
     } while(1);
