@@ -1,3 +1,4 @@
+#include "key_value_pair.h"
 #include "array_functions.h"
 #include "node.h"
 #include "linkedlist_functions.h"
@@ -8,6 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "tree_node.h"
+#include "search.h"	
+#include <string.h>	
 
 void execute_1_1() {
     printf("base implementation\n");
@@ -199,7 +203,54 @@ void execute_1_4() {
 }
 
 void execute_2_1(){
-    printf("execute_2_1");
+    struct key_value_pair *arr = generate_array_of_rand_key_value_pairs(400);
+    char *userInput;
+    do {
+        printf("sort by key or value? (k/v) (q to quit): ");
+        userInput = read_user_input();
+        if(strcmp(userInput, "k") == 0) {
+            quick_sort_key(arr, 400);
+            break;
+        }
+        else if(strcmp(userInput, "v") == 0) {
+            quick_sort_value(arr, 400);
+            break;
+        }   
+        else if(strcmp(userInput, "q") == 0) {
+            free(userInput);
+            for (int i = 0; i < 400; i++) {
+                free(arr[i].value);
+            }
+            free(arr);
+            exit(0);
+        }
+        free(userInput);
+    } while(1);
+    print_array_of_key_value_pairs(arr, 400);
+    printf ("\n");
+    struct tree_node *root = balanced_BST(arr, 400);
+    char *userInput2;
+    do {
+        printf("enter %s to search for (q to quit): ", strcmp(userInput, "k") ? "value" : "key");
+        userInput2 = read_user_input();
+        if(strcmp(userInput2, "q") == 0) {
+            free(userInput);
+            free(userInput2);
+            for (int i = 0; i < 400; i++) {
+                free(arr[i].value);
+            }
+            free(arr);
+            free_tree(root);
+            exit(0);
+        }
+        else if(strcmp(userInput, "k") == 0) {
+            printf("%d\n", search_key(root, strtod(userInput2, NULL)));
+        }
+        else {
+            printf("%d\n", search_value(root, userInput2));
+        }
+        free(userInput2);
+    } while(1);
 }
 
 void execute_2_2(){

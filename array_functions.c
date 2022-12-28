@@ -5,7 +5,9 @@
 #include "bubblesort.h"
 #include "insertionsort.h"
 #include "mergesort.h"
+#include "key_value_pair.h"
 #include "quicksort.h"
+#include "array_functions.h"
 
 int validate_sorted_array(int * array, int length, int ascending) {
     if (ascending) // if the array should be sorted in ascending order
@@ -116,4 +118,49 @@ int test_sort_array(int * pArray, int size, int asc, int print, char type) {
     }
     free(arrCopy); // free the memory
     return success;
+}
+
+char *generate_random_string(int length) {
+    char * str = malloc(sizeof(char) * (length + 1)); // allocate memory for the string
+    for (int i = 0; i < length; i++) {
+        int rnd = rand() % 62; // generate a random number between 0 and 61
+        if (rnd < 10) // if the random number is between 0 and 9
+            str[i] = rnd + 48; // add 48 to get the ASCII value for 0-9
+        else if (rnd < 36) // if the random number is between 10 and 35
+            str[i] = rnd + 55; // add 55 to get the ASCII value for A-Z
+        else // if the random number is between 36 and 61
+            str[i] = rnd + 61; // add 61 to get the ASCII value for a-z
+    }
+    str[length] = '\0'; // add the null terminator
+    return str;
+}
+
+struct key_value_pair *generate_array_of_rand_key_value_pairs(int size) {
+    int *rand_arr = randomized_array(size);
+    struct key_value_pair *array = malloc(sizeof(struct key_value_pair) * size);
+    for (int i = 0; i < size; i++) {
+        array[i].key = rand_arr[i];
+        array[i].value = generate_random_string(10);
+    }
+    free(rand_arr);
+    return array;
+}
+
+void print_array_of_key_value_pairs(struct key_value_pair *array, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%i: %s\n", array[i].key, array[i].value);
+    }
+}
+
+char *read_user_input() {
+    char *input = malloc(sizeof(char) * 100); // allocate memory for the input
+    int i = 0;
+    char c;
+    while ((c = getchar()) != '\n') // read the input until the user presses enter
+    {
+        input[i] = c;
+        i++;
+    }
+    input[i] = '\0'; // add the null terminator
+    return input;
 }

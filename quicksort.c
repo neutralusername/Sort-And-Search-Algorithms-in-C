@@ -1,6 +1,58 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "key_value_pair.h"
+#include "quicksort.h"
 
 int compare(int a, int b, int ascending);
+
+void quick_sort_key(struct key_value_pair * array, int length) {    
+    if (length < 2) {
+        return;
+    }
+    int pivot = array[length / 2].key;
+    int i, j;
+    for (i = 0, j = length - 1; ; i++, j--) {
+        while (array[i].key < pivot) {
+            i++;
+        }
+        while (array[j].key > pivot) {
+            j--;
+        }
+        if (i >= j) {
+            break;
+        }
+        struct key_value_pair temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    quick_sort_key(array, i);
+    quick_sort_key(array + i, length - i);
+}
+
+void quick_sort_value(struct key_value_pair * array, int length) {    
+    if (length < 2) {
+        return;
+    }
+    char * pivot = array[length / 2].value;
+    int i, j;
+    for (i = 0, j = length - 1; ; i++, j--) {
+        while (strcmp(array[i].value, pivot) < 0) {
+            i++;
+        }
+        while (strcmp(array[j].value, pivot) > 0) {
+            j--;
+        }
+        if (i >= j) {
+            break;
+        }
+        struct key_value_pair temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    quick_sort_value(array, i);
+    quick_sort_value(array + i, length - i);	
+}
 
 void quick_sort_array(int * array, int length, int ascending) {
     int pivot = array[length / 2];
