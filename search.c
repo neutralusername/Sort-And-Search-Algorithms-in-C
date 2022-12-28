@@ -23,10 +23,7 @@ int search_key(struct tree_node *root, int key) {
     if (root->key == key) {
         return 1;
     }
-    if (root->key > key) {
-        return search_key(root->left, key);
-    }
-    return search_key(root->right, key);
+    return search_key(root->left, key) || search_key(root->right, key);
 }
 
 int search_value(struct tree_node *root, char *value) {
