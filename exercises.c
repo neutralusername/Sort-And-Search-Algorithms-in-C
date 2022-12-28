@@ -203,22 +203,23 @@ void execute_1_4() {
 }
 
 void execute_2_1(){
-    struct key_value_pair *arr = generate_array_of_rand_key_value_pairs(400);
+    int length = 400;
+    struct key_value_pair *arr = generate_array_of_rand_key_value_pairs(length);
     char *userInput;
     do {
         printf("sort by key or value? (k/v) (q to quit): ");
         userInput = read_user_input();
         if(strcmp(userInput, "k") == 0) {
-            quick_sort_key(arr, 400);
+            quick_sort_key(arr, length);
             break;
         }
         else if(strcmp(userInput, "v") == 0) {
-            quick_sort_value(arr, 400);
+            quick_sort_value(arr, length);
             break;
         }   
         else if(strcmp(userInput, "q") == 0) {
             free(userInput);
-            for (int i = 0; i < 400; i++) {
+            for (int i = 0; i < length; i++) {
                 free(arr[i].value);
             }
             free(arr);
@@ -226,9 +227,9 @@ void execute_2_1(){
         }
         free(userInput);
     } while(1);
-    print_array_of_key_value_pairs(arr, 400);
+    print_array_of_key_value_pairs(arr, length);
     printf ("\n");
-    struct tree_node *root = balanced_BST(arr, 400);
+    struct tree_node *root = balanced_BST(arr, length);
     char *userInput2;
     do {
         printf("enter %s to search for (q to quit): ", strcmp(userInput, "k") ? "value" : "key");
@@ -236,7 +237,7 @@ void execute_2_1(){
         if(strcmp(userInput2, "q") == 0) {
             free(userInput);
             free(userInput2);
-            for (int i = 0; i < 400; i++) {
+            for (int i = 0; i < length; i++) {
                 free(arr[i].value);
             }
             free(arr);
