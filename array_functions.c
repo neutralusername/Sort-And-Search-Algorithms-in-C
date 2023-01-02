@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
 #include "bubblesort.h"
 #include "insertionsort.h"
 #include "mergesort.h"
@@ -153,9 +154,9 @@ void print_array_of_key_value_pairs(struct key_value_pair *array, int size) {
 }
 
 char *read_user_input() {
-    char *input = malloc(sizeof(char) * 100); // allocate memory for the input
+    char *input = calloc(100, sizeof(char)); // allocate memory for the input
     int i = 0;
-    char c;
+    char c = 60;
     while ((c = getchar()) != '\n') // read the input until the user presses enter
     {
         input[i] = c;
@@ -164,3 +165,4 @@ char *read_user_input() {
     input[i] = '\0'; // add the null terminator
     return input;
 }
+
