@@ -11,12 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void mais() {
 
-    printf("asdasdad");
-
-
-}
 void bsearch_function(char *search_input, struct key_value_pair *arr, int length, int std_int_comp()){
     char *endptr_string;
     long search_long = strtol(search_input, &endptr_string, 10);
@@ -27,23 +22,26 @@ void bsearch_function(char *search_input, struct key_value_pair *arr, int length
 
     if (search_long >= 32767 || search_long <= -32768) {
         printf("Sorry, but your input exceeds the range of keys\n");
-    } else {
+    } else if (search_input != endptr_string) {
 
         qsort(arr, length, sizeof(struct key_value_pair), std_int_comp);
         struct key_value_pair *result = bsearch(&search_long, &arr[0], length, sizeof(struct key_value_pair),
                                                 std_int_comp);
         if (result != NULL) {
-            printf("Success! Your requested key %d has been found! The corresponding string value is: %s\n",
+            printf("Success! Your requested key %d has been found! The corresponding string value is: %s\n\n",
                    result->key, result->value);
-            return;
         }
 
-        else
-        { printf("Your requested Key has not been found\n");
-        return;
+        else if(result == NULL) {
+            printf("Your requested Key has not been found\n\n");
         }
+
+
+
     }
-    free(endptr_string);
+
+
+
 }
 
 

@@ -259,47 +259,77 @@ void execute_2_1() {
 void execute_2_2() {
     int length = 400;
     struct key_value_pair *arr = generate_array_of_rand_key_value_pairs(length);
+    arr[20].key= 4000;
     for (int i = 0; i < 20; i++) {
         printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
     }
+    char *input;
+    int repeat_search=0;
 
     while (1) {
-        printf("What do you want to do? \n  Sort By [I]nteger Key, press I \n  Sort by [C]haracter string, press C \n  [S]earch for a key, press S \n  [Q]uit, press q\nHit Enter to confirm");
 
-        char *input = read_user_input();
+
+        if (repeat_search == 0){
+            printf("What do you want to do? \n\n  Sort By [I]nteger Key, press I \n  Sort by [C]haracter string, press C \n  [S]earch for a key, press S \n  [Q]uit, press q\n\nHit Enter to confirm\n");
+            input = read_user_input();
+        }
 
         if (*input == 105 || *input == 73) {
             qsort(arr, length, sizeof(struct key_value_pair), std_int_comp);
+            free(input);
+            for (int i = 0; i < 20; i++) {
+                printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
+            }
+
+
         }
 
         if (*input == 67 || *input == 99) {
             qsort(arr, length, sizeof(struct key_value_pair), std_string_comp);
+            free(input);
+            for (int i = 0; i < 20; i++) {
+                printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
+            }
         }
 
-        while (*input == 83 || *input == 115) {
+        if ((*input == 83 || *input == 115) || repeat_search == 1) {
             printf("Please type in the key value you would like to search for, in the range between -32768 and 32767\n");
             char *search_key;
             search_key = read_user_input();
             bsearch_function(search_key, arr, length, std_int_comp);
             free(search_key);
-            printf("Would you like to go back to method selection? \nPress [R] to restart\n(go back to first Option Selection)\nPress [S] to run another search\nPress [Q] to quit \nConfirm with enter\n");
+            printf("Would you like to go back to method selection? \n\nPress [R] to restart\n(go back to first Option Selection)\nPress [S] to run another search\nPress [Q] to quit \nConfirm with enter\n");
             input = read_user_input();
-            if (*input == 81 || *input == 113) {
-               break;
+            if(*input == 83 || *input == 115) {
+                repeat_search = 1;
+                free(input);
+                continue;
             }
+            else{
+                free(input);
+                repeat_search = 0;
+            }
+
+            /*if (*input == 81 || *input == 113) {
+                free(arr);
+                free(input);
+                break;
+
+            }*/
 
 
         }
         if (*input == 81 || *input == 113) {
+            for (int i = 0; i < length; i++) {
+                free(arr[i].value);
+            }
             free(arr);
             free(input);
             break;
         }
     }
-
-
-    printf("\n\nexecute_2_2");
 }
+
 
 void execute_2_3() {
     printf("execute_2_3");
