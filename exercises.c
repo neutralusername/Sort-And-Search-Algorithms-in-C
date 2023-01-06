@@ -276,49 +276,57 @@ void execute_2_2() {
 
         if (*input == 105 || *input == 73) {
             qsort(arr, length, sizeof(struct key_value_pair), std_int_comp);
-            free(input);
             for (int i = 0; i < 20; i++) {
                 printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
             }
-
+            free(input);
+            continue;
 
         }
 
         if (*input == 67 || *input == 99) {
             qsort(arr, length, sizeof(struct key_value_pair), std_string_comp);
-            free(input);
+
             for (int i = 0; i < 20; i++) {
                 printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
             }
+            free(input);
+            continue;
         }
 
         if ((*input == 83 || *input == 115) || repeat_search == 1) {
             printf("Please type in the key value you would like to search for, in the range between -32768 and 32767\n");
+            char *temp = input;
+            free(temp);
             char *search_key;
             search_key = read_user_input();
             bsearch_function(search_key, arr, length, std_int_comp);
             free(search_key);
             printf("Would you like to go back to method selection? \n\nPress [R] to restart\n(go back to first Option Selection)\nPress [S] to run another search\nPress [Q] to quit \nConfirm with enter\n");
             input = read_user_input();
+
             if(*input == 83 || *input == 115) {
                 repeat_search = 1;
-                free(input);
                 continue;
             }
-            else{
-                free(input);
-                repeat_search = 0;
-            }
 
-            /*if (*input == 81 || *input == 113) {
+            else if (*input == 81 || *input == 113) {
+                for (int i = 0; i < length; i++) {
+                    free(arr[i].value);
+                }
                 free(arr);
                 free(input);
                 break;
+            }
 
-            }*/
-
-
+            else{
+                repeat_search = 0;
+                free(input);
+            }
         }
+
+
+
         if (*input == 81 || *input == 113) {
             for (int i = 0; i < length; i++) {
                 free(arr[i].value);
