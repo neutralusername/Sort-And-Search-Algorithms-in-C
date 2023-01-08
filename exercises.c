@@ -270,9 +270,9 @@ int cmp_key_value_pairs(const void *a, const void *b) {
 
 void execute_2_3(){
     int array_len = 30000;
-    int search_n = 500;
+    int searches = 500;
 
-    int *searches = randomized_array(search_n);
+    int *search_keys = randomized_array(searches);
     struct key_value_pair *arr0 = generate_array_of_rand_key_value_pairs(array_len);
     struct key_value_pair *arr1 = copy_array_of_key_value_pairs(arr0, array_len);
 
@@ -280,15 +280,15 @@ void execute_2_3(){
     clock_t begin0 = clock();   // starting timer
     quick_sort_key(arr0, array_len);
     struct tree_node *bst = generate_BST(arr0, array_len);
-    for(int i = 0; i < search_n; i++)
-        tree_search_key(bst, searches[i]);
+    for(int i = 0; i < searches; i++)
+        tree_search_key(bst, search_keys[i]);
     long time0 = (clock() - begin0) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
     
     // timing stdlib implementations
     clock_t begin1 = clock();   // starting timer
     qsort(arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
-    for(int i = 0; i < search_n; i++)
-        bsearch(&searches[i], arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
+    for(int i = 0; i < searches; i++)
+        bsearch(&search_keys[i], arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
     long time1 = (clock() - begin1) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
 
     
@@ -298,7 +298,7 @@ void execute_2_3(){
     free(arr0);
     free(arr1);
     free_tree(bst);
-    free(searches);
+    free(search_keys);
 
     // printing results
     printf("Time of our impementations:    %ld ms\n", time0);
