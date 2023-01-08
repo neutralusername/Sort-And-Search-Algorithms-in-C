@@ -6,12 +6,14 @@
 #include "insertionsort.h"
 #include "mergesort.h"
 #include "quicksort.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "tree_node.h"
 #include "search.h"	
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>	
+
 
 void execute_1_1() {
     printf("base implementation\n");
@@ -258,6 +260,47 @@ void execute_2_2(){
     printf("execute_2_2");
 }
 
+// comparisson function necessary for 2.3
+int cmp_key_value_pairs(const void *a, const void *b) {
+    struct key_value_pair *kva = (struct key_value_pair*)a;
+    struct key_value_pair *kvb = (struct key_value_pair*)b;
+
+    return kva < kvb ? -1 : kva > kvb ? 1 : 0;
+}
+
 void execute_2_3(){
-    printf("execute_2_3");
+    int array_len = 30000;
+    int search_n = 500;
+
+    int *searches = randomized_array(search_n);
+    struct key_value_pair *arr0 = generate_array_of_rand_key_value_pairs(array_len);
+    struct key_value_pair *arr1 = copy_array_of_key_value_pairs(arr0, array_len);
+
+    // timing our implementations
+    clock_t begin0 = clock();   // starting timer
+    quick_sort_key(arr0, array_len);
+    struct tree_node *bst = generate_BST(arr0, array_len);
+    for(int i = 0; i < search_n; i++)
+        tree_search_key(bst, searches[i]);
+    long time0 = (clock() - begin0) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
+    
+    // timing stdlib implementations
+    clock_t begin1 = clock();   // starting timer
+    qsort(arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
+    for(int i = 0; i < search_n; i++)
+        bsearch(&searches[i], arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
+    long time1 = (clock() - begin1) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
+
+    
+    // freeing memory
+    for(int i = 0; i < array_len; i++)
+        (free(arr0[i].value), free(arr1[i].value));
+    free(arr0);
+    free(arr1);
+    free_tree(bst);
+    free(searches);
+
+    // printing results
+    printf("Time of our impementations:    %ld ms\n", time0);
+    printf("Time of stdlib impementations: %ld ms\n", time1);
 }

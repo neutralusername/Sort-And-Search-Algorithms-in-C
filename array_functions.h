@@ -11,6 +11,7 @@ int test_sort_array(int * pArray, int size, int asc, int print, char type);
 void randomize_array(signed int * array, int length);
 char *generate_random_string(int length);
 struct key_value_pair *generate_array_of_rand_key_value_pairs(int size);
+struct key_value_pair *copy_array_of_key_value_pairs(struct key_value_pair *source_array, int lenght);
 void print_array_of_key_value_pairs(struct key_value_pair *array, int size);
 char *read_user_input();
 #endif
