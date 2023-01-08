@@ -294,7 +294,7 @@ void execute_2_3(){
     
     // freeing memory
     for(int i = 0; i < array_len; i++)
-        (free(arr0[i].value), free(arr1[i].value));
+        free(arr1[i].value);
     free(arr0);
     free(arr1);
     free_tree(bst);
