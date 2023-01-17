@@ -12,6 +12,7 @@
 #include "tree_node.h"
 #include "search.h"	
 #include <string.h>	
+#include "quicksort_search_stdlib.h"
 
 void execute_1_1() {
     printf("base implementation\n");
@@ -255,9 +256,126 @@ void execute_2_1(){
 }
 
 void execute_2_2(){
-    printf("execute_2_2");
+    int length = 400;
+    struct key_value_pair *arr = generate_array_of_rand_key_value_pairs(length);
+    arr[20].key= 4000;
+    for (int i = 0; i < 20; i++) {
+        printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
+    }
+    char *input;
+    int repeat_search=0;
+
+    while (1) {
+
+
+        if (repeat_search == 0){
+            printf("What do you want to do? \n\n  Sort By [I]nteger Key, press I \n  Sort by [C]haracter string, press C \n  [S]earch for a key, press S \n  [Q]uit, press q\n\nHit Enter to confirm\n");
+            input = read_user_input();
+        }
+
+        if (*input == 105 || *input == 73) {
+            qsort(arr, length, sizeof(struct key_value_pair), std_int_comp);
+            for (int i = 0; i < 20; i++) {
+                printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
+            }
+            free(input);
+            continue;
+
+        }
+
+        if (*input == 67 || *input == 99) {
+            qsort(arr, length, sizeof(struct key_value_pair), std_string_comp);
+
+            for (int i = 0; i < 20; i++) {
+                printf("%d key: %d string: %s\n", i, arr[i].key, arr[i].value);
+            }
+            free(input);
+            continue;
+        }
+
+        if ((*input == 83 || *input == 115) || repeat_search == 1) {
+            printf("Please type in the key value you would like to search for, in the range between -32768 and 32767\n");
+            char *temp = input;
+            free(temp);
+            char *search_key;
+            search_key = read_user_input();
+            bsearch_function(search_key, arr, length, std_int_comp);
+            free(search_key);
+            printf("Would you like to go back to method selection? \n\nPress [R] to restart\n(go back to first Option Selection)\nPress [S] to run another search\nPress [Q] to quit \nConfirm with enter\n");
+            input = read_user_input();
+
+            if(*input == 83 || *input == 115) {
+                repeat_search = 1;
+                continue;
+            }
+
+            else if (*input == 81 || *input == 113) {
+                for (int i = 0; i < length; i++) {
+                    free(arr[i].value);
+                }
+                free(arr);
+                free(input);
+                break;
+            }
+
+            else{
+                repeat_search = 0;
+                free(input);
+            }
+        }
+
+
+
+        if (*input == 81 || *input == 113) {
+            for (int i = 0; i < length; i++) {
+                free(arr[i].value);
+            }
+            free(arr);
+            free(input);
+            break;
+        }
+    }
 }
 
+int cmp_key_value_pairs(const void *a, const void *b) {
+    struct key_value_pair *kva = (struct key_value_pair*)a;
+    struct key_value_pair *kvb = (struct key_value_pair*)b;
+
+    return kva < kvb ? -1 : kva > kvb ? 1 : 0;
+}
 void execute_2_3(){
-    printf("execute_2_3");
+    int array_len = 30000;
+    int searches = 500;
+
+    int *search_keys = randomized_array(searches);
+    struct key_value_pair *arr0 = generate_array_of_rand_key_value_pairs(array_len);
+    struct key_value_pair *arr1 = copy_array_of_key_value_pairs(arr0, array_len);
+
+    // timing our implementations
+    clock_t begin0 = clock();   // starting timer
+    quick_sort_key(arr0, array_len);
+    struct tree_node *bst = generate_BST(arr0, array_len);
+    for(int i = 0; i < searches; i++)
+        tree_search_key(bst, search_keys[i]);
+    long time0 = (clock() - begin0) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
+    
+    // timing stdlib implementations
+    clock_t begin1 = clock();   // starting timer
+    qsort(arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
+    for(int i = 0; i < searches; i++)
+        bsearch(&search_keys[i], arr1, (size_t)array_len, sizeof(struct key_value_pair), *cmp_key_value_pairs);
+    long time1 = (clock() - begin1) * 1000 / CLOCKS_PER_SEC;    // saving time in ms
+
+    
+    // freeing memory
+    for(int i = 0; i < array_len; i++)
+        free(arr1[i].value);
+    free(arr0);
+    free(arr1);
+    free_tree(bst);
+    free(search_keys);
+
+    // printing results
+    printf("Time of our impementations:    %ld ms\n", time0);
+    printf("Time of stdlib impementations: %ld ms\n", time1);
 }

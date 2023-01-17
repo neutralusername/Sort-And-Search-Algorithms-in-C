@@ -23,10 +23,10 @@ int main(int argc, char * args[]) {
         } else if (!strcmp(args[1], "-2.3")) {
             execute_2_3();
         } else {
-            fprintf(stderr, "invalid argument. valid arguments are \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"");
+            fprintf(stderr, "invalid argument. valid arguments are \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"\n");
         }
     } else {
-        fprintf(stderr, "missing argument: provide one of \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"");
+        fprintf(stderr, "missing argument: provide one of \"-1.1\", \"-1.2\", \"-1.3\", \"-1.4\", \"-2.1\", \"-2.2\", \"-2.3\"\n");
     }
     return 0;
 }

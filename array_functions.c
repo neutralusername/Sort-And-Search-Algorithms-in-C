@@ -146,6 +146,13 @@ struct key_value_pair *generate_array_of_rand_key_value_pairs(int size) {
     return array;
 }
 
+struct key_value_pair *copy_array_of_key_value_pairs(struct key_value_pair *source_array, int length) {
+    struct key_value_pair *arr = malloc(sizeof(struct key_value_pair) * length);
+    for(int i = 0; i < length; i++)
+        arr[i] = source_array[i];
+    return arr;
+}
+
 void print_array_of_key_value_pairs(struct key_value_pair *array, int size) {
     for (int i = 0; i < size; i++) {
         printf("%i: %s\n", array[i].key, array[i].value);
