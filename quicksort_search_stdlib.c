@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "quicksort_search_stdlib.h"
 
 
 void bsearch_function(char *search_input, struct key_value_pair *arr, int length, int std_int_comp()){

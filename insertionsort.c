@@ -1,5 +1,6 @@
 #include "node.h"
 #include <stdio.h>
+#include "insertionsort.h"
 
 struct Node * sorted_insert(struct Node * head, struct Node * insertion_node, int ascending) /*parameters: the current head of the list, the node to be inserted, and a boolean indicating whether the list should be sorted in ascending or descending order*/{
     if (head == NULL || (ascending ? head -> data >= insertion_node -> data : head -> data <= insertion_node -> data)) {

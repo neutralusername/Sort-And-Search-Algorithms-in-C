@@ -1,3 +1,4 @@
+#include "bubblesort.h"
 void bubble_sort_array(int * array, int length, int ascending) {
     // simple bubble sort implementation
     int i, j, temp; // declare variables. i and j are used for iteration, temp is used for swapping.

@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
+#include "mergesort.h"
 
 void merge_sort_array(int * input, int size, int asc) {
     if (size > 1) { //if the array is empty or has only one element.  This is the base case for the recursion. If the array is empty or has only one element, it is already sorted.

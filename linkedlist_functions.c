@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
+#include "linkedlist_functions.h"
 
 struct Node * linked_list_from_array(int * array, int length) {
     struct Node * head = malloc(sizeof(struct Node));

@@ -13,6 +13,7 @@
 #include "search.h"	
 #include <string.h>	
 #include "quicksort_search_stdlib.h"
+#include "exercises.h"
 
 void execute_1_1() {
     printf("base implementation\n");

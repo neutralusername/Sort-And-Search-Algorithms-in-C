@@ -3,6 +3,7 @@
 #include <string.h>
 #include "tree_node.h"
 #include "key_value_pair.h"
+#include "search.h"
 
 struct tree_node *generate_BST(struct key_value_pair *array, int length) {
     if (length == 0) {
