@@ -12,7 +12,7 @@ void bsearch_function(char *search_input, struct key_value_pair *arr, int length
     long search_long = strtol(search_input, &endptr_string, 10);
 
     if (search_input == endptr_string) {
-        printf(" number : %ld  invalid  (no digits found, 0 returned)\n", search_long);
+        printf("number : %ld  invalid  (no digits found, 0 returned)\n", search_long);
     }
 
     if (search_long >= 32767 || search_long <= -32768) {
@@ -20,19 +20,15 @@ void bsearch_function(char *search_input, struct key_value_pair *arr, int length
     } else if (search_input != endptr_string) {
 
         qsort(arr, length, sizeof(struct key_value_pair), std_int_comp);
-        struct key_value_pair *result = bsearch(&search_long, &arr[0], length, sizeof(struct key_value_pair),
-                                                std_int_comp);
+        struct key_value_pair *result = bsearch(&search_long, &arr[0], length, sizeof(struct key_value_pair), std_int_comp);
         if (result != NULL) {
-            printf("Success! Your requested key %d has been found! The corresponding string value is: %s\n\n",
+            printf("Success! Your requested key %d has been found! The corresponding string value is: %s\n",
                    result->key, result->value);
         }
 
         else if(result == NULL) {
-            printf("Your requested Key has not been found\n\n");
+            printf("Your requested Key has not been found\n");
         }
-
-
-
     }
 
 

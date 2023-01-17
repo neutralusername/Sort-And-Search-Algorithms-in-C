@@ -39,7 +39,7 @@ void print_array(int * array, int length) {
 
 void randomize_array(signed int * array, int length) {
     for (int i = 0; i < length; i++) {
-        int randomint = rand(); // generate a random number
+        int randomint = rand()%32768; // generate a random number
         if (rand() % 2) //with 50% chance
         {
             randomint = randomint * -1; // make the number negative 
@@ -79,7 +79,7 @@ void copy_array_into_array(int * source_array, int * destination_array, int leng
 int * randomized_array(int size) {
     int * arr = malloc(sizeof(int) * size); // allocate memory for the array
     for (int i = 0; i < size; i++) { // fill the array with random integer between -32768 and 32767
-        int rnd = rand(); // generate a random number max 32767
+        int rnd = rand()%32768; // generate a random number max 32767
         if (rand() % 2 == 0) // if random number is even
             rnd = -1 * (rnd + 1); // make rnd negative and add+1 to allow -32768
         arr[i] = rnd;
