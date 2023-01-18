@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#include "exercises.h"
+#include "exercises1.h"
+#include "exercises2.h"
 
 int main(int argc, char * args[]) {
     srand(time(NULL)); // seeding rand innitially
