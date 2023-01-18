@@ -1,0 +1,23 @@
+# ninja log v5
+3	166	6946356142528555	CMakeFiles/TIProjekt.dir/bubblesort.c.obj	5fae914ac2dc0337
+0	220	6946356143114854	CMakeFiles/TIProjekt.dir/array_functions.c.obj	bcc3585e9a2f6a06
+21	221	6946356143075761	CMakeFiles/TIProjekt.dir/quicksort.c.obj	73259d2a7be3b73c
+12	175	6946356142401531	CMakeFiles/TIProjekt.dir/insertionsort.c.obj	98b2b825ba4f9762
+9	189	6946356142782621	CMakeFiles/TIProjekt.dir/linkedlist_functions.c.obj	dde87ea7a381ca25
+3	85	6946449145744042	CMakeFiles/TIProjekt.dir/quicksort_search_stdlib.c.obj	82ef4ae51811e450
+18	216	6946356142987828	CMakeFiles/TIProjekt.dir/mergesort.c.obj	aa36f27e8a1e84f4
+24	222	6946356142968282	CMakeFiles/TIProjekt.dir/search.c.obj	4e781965fae2663c
+15	219	6946356142948740	CMakeFiles/TIProjekt.dir/main.c.obj	97bb3c4ac6068e32
+128	264	6947168014132494	TIProjekt.exe	9eaabbcc9362af8
+7	102	6957528537271347	CMakeFiles/TIProjekt.dir/bubblesort.c.obj	5fae914ac2dc0337
+22	150	6957528537761458	CMakeFiles/TIProjekt.dir/main.c.obj	97bb3c4ac6068e32
+12	155	6957528537591429	CMakeFiles/TIProjekt.dir/insertionsort.c.obj	98b2b825ba4f9762
+17	156	6957528537711463	CMakeFiles/TIProjekt.dir/mergesort.c.obj	aa36f27e8a1e84f4
+20	160	6957528537851480	CMakeFiles/TIProjekt.dir/linkedlist_functions.c.obj	dde87ea7a381ca25
+14	170	6957528537961505	CMakeFiles/TIProjekt.dir/exercises2.c.obj	ecc5e154651ddcd0
+25	181	6957528538081529	CMakeFiles/TIProjekt.dir/search.c.obj	4e781965fae2663c
+9	182	6957528538081529	CMakeFiles/TIProjekt.dir/exercises1.c.obj	fc9449691604ac09
+3	190	6957528538181550	CMakeFiles/TIProjekt.dir/array_functions.c.obj	bcc3585e9a2f6a06
+103	220	6957528538481618	CMakeFiles/TIProjekt.dir/quicksort.c.obj	73259d2a7be3b73c
+151	246	6957528538751675	CMakeFiles/TIProjekt.dir/quicksort_search_stdlib.c.obj	82ef4ae51811e450
+246	407	6957528540349863	TIProjekt.exe	8c4ba297cd42c41c
